@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="container">
+        <div>
             <div>
                 <div class=" box">
-                    <h1>Event Attendees</h1>
+                    <h1 class="text-4xl font-bold text-center my-1">Coffee☕ <br>& <br> Code👨‍💻</h1>
+                    <h1 class="text-4xl font-bold text-center my-1">Submit Your Details</h1>
 
                     <form id="attendee-form" @submit.prevent="addAttendee" class="text-black">
                         <label class="text-white" for="name">Name:</label>
@@ -23,9 +24,14 @@
 
                         <span v-if="loading" class="loader"></span>
                         <button v-else type="submit" :disabled="!isFormOpen">Add Attendee</button>
-                        <div class="text-black" style="display: flex; align-items: center; justify-content: space-between;">
-                            <router-link style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;" to="/members">Registered Members</router-link>
-                            <router-link style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;" to="/selected">Selected Members</router-link>
+                        <div class="text-black"
+                            style="display: flex; align-items: center; justify-content: space-between;">
+                            <router-link
+                                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
+                                to="/members">Registered Members</router-link>
+                            <router-link
+                                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
+                                to="/selected">Selected Members</router-link>
 
                         </div>
                     </form>
