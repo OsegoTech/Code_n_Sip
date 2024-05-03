@@ -18,7 +18,7 @@ import axios from 'axios';
 const attendees = ref([]);
 const fetchAttendees = async () => {
     try {
-        const response = await axios.get('http://localhost:3000/api/attendees');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/attendees`);
         attendees.value = response.data;
     } catch (error) {
         console.error('Error fetching attendees:', error);

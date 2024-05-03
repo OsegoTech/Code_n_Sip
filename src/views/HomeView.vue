@@ -69,7 +69,7 @@ const addAttendee = async () => {
     try {
         loading.value = true;
         console.log('Adding attendee:', attendee.value);
-        const response = await axios.post('http://localhost:3000/api/attendees', attendee.value);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/attendees`, attendee.value);
         selectedAttendees.value.push(response.data); // Assuming the endpoint returns the added attendee
         attendee.value = { name: '', gender: 'male', specialization: '' }; // Reset form fields
     } catch (error) {
@@ -83,7 +83,7 @@ const addAttendee = async () => {
 
 const selectAttendees = async () => {
     try {
-        const response = await axios.get('http://localhost:3000/api/random-attendees');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/random-attendees`);
         selectedAttendees.value = response.data;
     } catch (error) {
         console.error('Error fetching attendees:', error);
