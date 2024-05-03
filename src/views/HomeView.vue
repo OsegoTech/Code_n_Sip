@@ -24,7 +24,7 @@
 
                         <span v-if="loading" class="loader"></span>
                         <button v-else type="submit">Add Attendee</button>
-                        <div class="text-black"
+                        <div class="text-black flex justify-between w-full mt-3"
                             style="display: flex; align-items: center; justify-content: space-between;">
                             <router-link
                                 style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
