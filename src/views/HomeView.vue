@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div>
-                <div v-if="isFormOpen" class=" box">
+                <div class=" box">
                     <h1>Event Attendees</h1>
 
                     <form id="attendee-form" @submit.prevent="addAttendee">
@@ -22,24 +22,18 @@
                         <input type="text" id="specialization" v-model="attendee.specialization"><br>
 
                         <span v-if="loading" class="loader"></span>
-                        <button v-else type="submit">Add Attendee</button>
+                        <button v-else type="submit" :disabled="!isFormOpen">Add Attendee</button>
+                        <div class="text-black" style="display: flex; align-items: center; justify-content: space-between;">
+                            <router-link style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;" to="/members">Registered Members</router-link>
+                            <router-link style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;" to="/selected">Selected Members</router-link>
+
+                        </div>
                     </form>
                 </div>
-                <div v-else>
-                    <div>
-                        <p>Oops!😄 </p>
-                        <p>Registration is closed. Please check back later for the list of selected attendees.🎉</p>
-                    </div>
 
-                    <div>
-                        <router-link to="/members">Registered Members</router-link>
-                        <router-link to="/selected">Selected Members</router-link>
-
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="timer" v-if="isFormOpen">
+        <div class="timer" v-if="!isFormOpen">
             <h4>Registration Closes in</h4>
             <p>{{ countdown }}</p>
         </div>
@@ -57,6 +51,7 @@ const isFormOpen = ref(true);
 const countdown = ref('');
 const loading = ref(false);
 const submittedOnce = ref(false);
+const newAttendee = ref({});
 
 // Function to check if the form has been submitted once
 const checkSubmissionStatus = () => {
@@ -71,15 +66,6 @@ const attendee = ref({
     gender: 'Female', // default gender
     specialization: ''
 });
-
-
-
-
-const newAttendee = ref({});
-
-
-
-
 const addAttendee = async () => {
     if (submittedOnce.value) {
         toast.error('You have already submitted the form');
@@ -109,7 +95,7 @@ const addAttendee = async () => {
 const updateTime = () => {
     const now = new Date();
     const targetTime = new Date();
-    targetTime.setHours(19, 0, 0, 0); // Set time to 7:00 PM today
+    targetTime.setHours(22, 0, 0, 0); // Set time to 7:00 PM today
     if (now < targetTime) {
         const timeDifference = targetTime - now;
         const hours = Math.floor(timeDifference / (1000 * 60 * 60));

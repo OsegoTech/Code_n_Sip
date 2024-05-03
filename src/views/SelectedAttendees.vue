@@ -1,7 +1,17 @@
 <template>
     <div>
-        <div class="box">
-            <h1>Selected Attendees:</h1>
+        <div class="text-black"
+            style="display: flex; align-items: center; justify-content: space-between; width: 700px; margin:  20px auto; ">
+            <router-link
+                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
+                to="/">Home</router-link>
+            <router-link
+                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
+                to="/members">Registered Members</router-link>
+
+        </div>
+        <div class="">
+            <h1 class="">Selected Attendees:</h1>
             <ul>
                 <li v-for="attendee in selectedAttendees" :key="attendee.id" class="list">
                     <p style="width: 200px;">{{ attendee.name }}</p>
@@ -9,11 +19,12 @@
                 </li>
             </ul>
         </div>
+        
     </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 
 const selectedAttendees = ref([]);
@@ -26,7 +37,7 @@ const selectAttendees = async () => {
     }
 }
 
-onMounted(()=>{
+onMounted(() => {
     selectAttendees()
 })
 </script>
