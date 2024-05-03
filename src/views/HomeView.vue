@@ -101,7 +101,7 @@ const addAttendee = async () => {
 const updateTime = () => {
     const now = new Date();
     const targetTime = new Date();
-    targetTime.setHours(22, 0, 0, 0); // Set time to 7:00 PM today
+    targetTime.setHours(22, 30, 0, 0); // Set time to 7:00 PM today
     if (now < targetTime) {
         const timeDifference = targetTime - now;
         const hours = Math.floor(timeDifference / (1000 * 60 * 60));
