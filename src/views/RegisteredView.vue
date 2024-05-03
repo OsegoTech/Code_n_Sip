@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-screen">
         <div class="text-black justify-between flex flex-col md:flex-row gap-3 w-full md:w-full lg:w-1/2 mx-auto mt-4"
             style=" ">
             <router-link

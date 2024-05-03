@@ -26,12 +26,7 @@ form {
   border-radius: 8px;
 }
 
-.list {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
-}
+
 
 form input {
   width: 100%;
@@ -82,9 +77,7 @@ ul {
   gap: 80px;
 } */
 
-.box {
-  flex: 1;
-}
+
 
 .timer {
   display: flex;

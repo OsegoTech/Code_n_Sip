@@ -1,8 +1,10 @@
 <template>
+  <div class="w-full">
 
-  <RouterView></RouterView>
+    <RouterView></RouterView>
+  </div>
 </template>
-<script setup> 
+<script setup>
 import { RouterView } from 'vue-router'
 </script>
 

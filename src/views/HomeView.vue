@@ -5,12 +5,12 @@
                 <div class=" box">
                     <h1>Event Attendees</h1>
 
-                    <form id="attendee-form" @submit.prevent="addAttendee">
-                        <label for="name">Name:</label>
+                    <form id="attendee-form" @submit.prevent="addAttendee" class="text-black">
+                        <label class="text-white" for="name">Name:</label>
                         <input type="text" id="name" v-model="attendee.name" required><br>
 
                         <br>
-                        <label for="gender">Gender:</label>
+                        <label class="text-white" for="gender">Gender:</label>
                         <select id="gender" v-model="attendee.gender">
 
                             <option value="male">Male</option>
@@ -18,7 +18,7 @@
                             <option value="other">Other</option>
                         </select><br>
                         <br>
-                        <label for="specialization">Field of Specialization:</label>
+                        <label class="text-white" for="specialization">Field of Specialization:</label>
                         <input type="text" id="specialization" v-model="attendee.specialization"><br>
 
                         <span v-if="loading" class="loader"></span>
