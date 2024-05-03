@@ -25,14 +25,17 @@
                         <button v-else type="submit">Add Attendee</button>
                     </form>
                 </div>
-                <div class="box" v-else>
-                    <h1>Selected Attendees:</h1>
-                    <ul>
-                        <li v-for="attendee in selectedAttendees" :key="attendee.id" class="list">
-                            <p style="width: 200px;">{{ attendee.name }}</p>
-                            <p style="width: 500px;">{{ attendee.specialization }}</p>
-                        </li>
-                    </ul>
+                <div v-else>
+                    <div>
+                        <p>Oops!😄 </p>
+                        <p>Registration is closed. Please check back later for the list of selected attendees.🎉</p>
+                    </div>
+
+                    <div>
+                        <router-link to="/members">Registered Members</router-link>
+                        <router-link to="/selected">Selected Members</router-link>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +74,8 @@ const attendee = ref({
 
 
 
-const selectedAttendees = ref([]);
+
+const newAttendee = ref({});
 
 
 
@@ -86,7 +90,7 @@ const addAttendee = async () => {
         loading.value = true;
         console.log('Adding attendee:', attendee.value);
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/attendees`, attendee.value);
-        selectedAttendees.value.push(response.data); // Assuming the endpoint returns the added attendee
+        newAttendee.value.push(response.data); // Assuming the endpoint returns the added attendee
         toast.success('Hooraay! you could be selected😀');
         attendee.value = { name: '', gender: 'male', specialization: '' }; // Reset form fields
         localStorage.setItem('submittedOnce', true); // Set the submittedOnce flag in localStorage
@@ -99,14 +103,7 @@ const addAttendee = async () => {
 
 
 
-const selectAttendees = async () => {
-    try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/random-attendees`);
-        selectedAttendees.value = response.data;
-    } catch (error) {
-        console.error('Error fetching attendees:', error);
-    }
-}
+
 
 
 const updateTime = () => {
@@ -128,7 +125,6 @@ const updateTime = () => {
 
 onMounted(() => {
     checkSubmissionStatus();
-    selectAttendees()
     setInterval(updateTime, 1000); // Update time every second
 });
 
