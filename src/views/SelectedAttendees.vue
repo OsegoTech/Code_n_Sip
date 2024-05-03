@@ -11,7 +11,7 @@
 
         </div>
         <div class="">
-            <h1 class="text-4xl font-bold">Selected Attendees:</h1>
+            <h1 class="text-4xl font-bold text-center my-3">Selected Attendees:</h1>
             <ul class="px-2 flex flex-col md:flex-row gap-3">
                 <li v-for="attendee in selectedAttendees" :key="attendee.id"
                     class="w-full md:w-[500px] flex flex-col bg-gray-600 hover:bg-blue-700 md:flex-row my-1 px-3 py-2 rounded-lg">

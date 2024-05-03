@@ -23,7 +23,7 @@
                         <input type="text" id="specialization" v-model="attendee.specialization"><br>
 
                         <span v-if="loading" class="loader"></span>
-                        <button v-else type="submit" :disabled="!isFormOpen">Add Attendee</button>
+                        <button v-else type="submit">Add Attendee</button>
                         <div class="text-black"
                             style="display: flex; align-items: center; justify-content: space-between;">
                             <router-link
