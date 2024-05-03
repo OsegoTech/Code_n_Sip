@@ -46,10 +46,22 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 const isFormOpen = ref(true);
 const countdown = ref('');
 const loading = ref(false);
+const submittedOnce = ref(false);
+
+// Function to check if the form has been submitted once
+const checkSubmissionStatus = () => {
+    if (localStorage.getItem('submittedOnce')) {
+        submittedOnce.value = true;
+        isFormOpen.value = false; // Close the form if submitted once
+    }
+};
 
 const attendee = ref({
     name: '',
@@ -65,13 +77,19 @@ const selectedAttendees = ref([]);
 
 
 const addAttendee = async () => {
+    if (submittedOnce.value) {
+        toast.error('You have already submitted the form');
+        return;
+    }
 
     try {
         loading.value = true;
         console.log('Adding attendee:', attendee.value);
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/attendees`, attendee.value);
         selectedAttendees.value.push(response.data); // Assuming the endpoint returns the added attendee
+        toast.success('Hooraay! you could be selected😀');
         attendee.value = { name: '', gender: 'male', specialization: '' }; // Reset form fields
+        localStorage.setItem('submittedOnce', true); // Set the submittedOnce flag in localStorage
     } catch (error) {
         console.error('Error adding attendee:', error);
     } finally {
@@ -109,6 +127,7 @@ const updateTime = () => {
 
 
 onMounted(() => {
+    checkSubmissionStatus();
     selectAttendees()
     setInterval(updateTime, 1000); // Update time every second
 });
