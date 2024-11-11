@@ -3,7 +3,7 @@
         <div>
             <div>
                 <div class=" box">
-                    <h1 class="text-4xl font-bold text-center my-1">Coffee☕ <br>& <br> Code👨‍💻</h1>
+                    <h1 class="text-4xl font-bold text-center my-1">Tech4All</h1>
                     <h1 class="text-4xl font-bold text-center my-1">Submit Your Details</h1>
 
                     <form id="attendee-form" @submit.prevent="addAttendee" class="text-black">
