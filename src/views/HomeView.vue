@@ -1,126 +1,129 @@
 <template>
-    <div>
-        <div>
-            <div>
-                <div class=" box">
-                    <h1 class="text-4xl font-bold text-center my-1">Tech4All</h1>
-                    <h1 class="text-4xl font-bold text-center my-1">Submit Your Details</h1>
-
-                    <form id="attendee-form" @submit.prevent="addAttendee" class="text-black">
-                        <label class="text-white" for="name">Name:</label>
-                        <input type="text" id="name" v-model="attendee.name" required><br>
-
-                        <br>
-                        <label class="text-white" for="gender">Gender:</label>
-                        <select id="gender" v-model="attendee.gender">
-
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select><br>
-                        <br>
-                        <label class="text-white" for="specialization">Field of Specialization:</label>
-                        <input type="text" id="specialization" v-model="attendee.specialization"><br>
-
-                        <span v-if="loading" class="loader"></span>
-                        <button v-else type="submit">Add Attendee</button>
-                        <div class="text-black flex justify-between w-full mt-3"
-                            style="display: flex; align-items: center; justify-content: space-between;">
-                            <router-link
-                                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
-                                to="/members">Registered Members</router-link>
-                            <router-link
-                                style="background-color: white; padding: 10px 15px; border-radius: 15px; text-decoration: none;"
-                                to="/selected">Selected Members</router-link>
-
-                        </div>
-                    </form>
-                </div>
-
+    <div class="bg-[#0b132b] min-h-screen text-white py-10">
+      <!-- Header Section -->
+      <div class="container mx-auto text-center mb-10">
+        <h1 class="text-4xl font-bold mb-4">🚀 UpSkill</h1>
+        <p class="text-gray-300 text-lg">Your journey to learn and explore new skills</p>
+      </div>
+  
+      <!-- MS Learn Links Section -->
+      <div class="container mx-auto md:w-3/5 lg:w-2/5 bg-[#1d2d50] rounded-lg p-6 mb-10">
+        <h2 class="text-2xl font-semibold mb-4 text-center">MS Learn Resources</h2>
+        <div class="space-y-3">
+          <a
+            v-for="link in links"
+            :key="link.title"
+            :href="link.link"
+            target="_blank"
+            class="block bg-[#C2E7D9] px-4 py-3 rounded-lg text-gray-800 hover:bg-[#a3dac7] transition"
+          >
+            <div class="flex justify-between items-center">
+              <p>{{ link.title }}</p>
+              <span>🖊️</span>
             </div>
+          </a>
         </div>
-        <div class="timer" v-if="!isFormOpen">
-            <h4>Registration Closes in</h4>
-            <p>{{ countdown }}</p>
+      </div>
+  
+      <!-- YouTube Videos Section -->
+      <div class="container mx-auto md:w-3/5 lg:w-2/5 bg-[#1d2d50] rounded-lg p-6 mb-10">
+        <h2 class="text-2xl font-semibold mb-4 text-center">YouTube Videos</h2>
+        <div class="space-y-3">
+          <iframe
+            v-for="video in videos"
+            :key="video.title"
+            :src="video.link"
+            class="w-full h-48 rounded-lg"
+            allowfullscreen
+            width="560"
+            height="315"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
         </div>
+      </div>
+  
+      <!-- Social Links Section -->
+      <div class="container mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-4">Connect with Us</h2>
+        <div class="flex justify-center space-x-4">
+          <a
+            v-for="social in socialLinks"
+            :key="social.name"
+            :href="social.link"
+            target="_blank"
+            class="text-lg hover:text-[#C2E7D9] transition"
+          >
+            {{ social.icon }}
+          </a>
+        </div>
+      </div>
+
     </div>
-
-</template>
-<script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import { useToast } from 'vue-toastification';
-
-const toast = useToast();
-
-const isFormOpen = ref(true);
-const countdown = ref('');
-const loading = ref(false);
-const submittedOnce = ref(false);
-const newAttendee = ref({});
-
-// Function to check if the form has been submitted once
-const checkSubmissionStatus = () => {
-    if (localStorage.getItem('submittedOnce')) {
-        submittedOnce.value = true;
-        isFormOpen.value = false; // Close the form if submitted once
+    <div>
+      <p class="text-center ">
+        Made with ❤️ by <a href="https://github.com/OsegoTech" target="_blank">Omollo</a>
+      </p>
+    </div>
+  </template>
+  
+  <script setup>
+  import { ref } from 'vue'
+  
+  // MS Learn links
+  const links = ref([
+    {
+      title: 'Python for Beginners',
+      link: 'https://learn.microsoft.com/en-us/training/paths/beginner-python/?wt.mc_id=studentamb_269632'
+    },
+    {
+      title: 'Python in Space Exploration',
+      link: 'https://learn.microsoft.com/en-us/training/paths/introduction-python-space-exploration-nasa/'
+    },
+    {
+      title: 'Azure Static Web Apps',
+      link: 'https://learn.microsoft.com/en-us/training/paths/azure-static-web-apps/?wt.mc_id=studentamb_269632'
+    },
+    {
+      title: 'Azure DevOps',
+      link: 'https://learn.microsoft.com/en-us/training/paths/evolve-your-devops-practices/?wt.mc_id=studentamb_269632'
     }
-};
-
-const attendee = ref({
-    name: '',
-    gender: 'Female', // default gender
-    specialization: ''
-});
-const addAttendee = async () => {
-    if (submittedOnce.value) {
-        toast.error('You have already submitted the form');
-        return;
+  ])
+  
+  // YouTube video links
+  const videos = ref([
+    {
+      title: 'Deploy Node App to Azure',
+      link: 'https://www.youtube.com/embed/rHbs6VLgdv0'
+    },
+    {
+      title: 'Connect MongoDB to Node',
+      link: 'https://www.youtube.com/embed/uJlzYLaarNs'
     }
-
-    try {
-        loading.value = true;
-        console.log('Adding attendee:', attendee.value);
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/attendees`, attendee.value);
-        newAttendee.value.push(response.data); // Assuming the endpoint returns the added attendee
-        toast.success('Hooraay! you could be selected😀');
-        attendee.value = { name: '', gender: 'male', specialization: '' }; // Reset form fields
-        localStorage.setItem('submittedOnce', true); // Set the submittedOnce flag in localStorage
-    } catch (error) {
-        console.error('Error adding attendee:', error);
-    } finally {
-        loading.value = false;
+  ])
+  
+  // Social media links
+  const socialLinks = ref([
+    {
+      name: 'Twitter',
+      icon: '🐦',
+      link: 'https://twitter.com/osego_baba'
+    },
+    {
+      name: 'LinkedIn',
+      icon: '🔗',
+      link: 'https://linkedin.com/in/omollo-cliff'
+    },
+    {
+      name: 'GitHub',
+      icon: '💻',
+      link: 'https://github.com/OsegoTech'
     }
-};
-
-
-
-
-
-
-const updateTime = () => {
-    const now = new Date();
-    const targetTime = new Date();
-    targetTime.setHours(22, 30, 0, 0); // Set time to 7:00 PM today
-    if (now < targetTime) {
-        const timeDifference = targetTime - now;
-        const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        countdown.value = `${hours}h ${minutes}m ${seconds}s`;
-    } else {
-        isFormOpen.value = false; // If the target time has already passed, close the form
-    }
-};
-
-
-
-onMounted(() => {
-    checkSubmissionStatus();
-    setInterval(updateTime, 1000); // Update time every second
-});
-
-
-</script>
-
-<style scoped></style>
+  ])
+  </script>
+  
+  <style scoped>
+  /* Optional additional styling */
+  </style>
+  
