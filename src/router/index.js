@@ -1,25 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import RegisteredView from '../views/RegisteredView.vue'
-import SelectedAttendees from '../views/SelectedAttendees.vue'
+import LandingPage from '@/views/LandingPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
+      component: LandingPage
+    },
+    {
+      path: '/resources',
+      name: 'Resources',
       component: HomeView
-    },
-    {
-      path: '/members',
-      name: 'members',
-      component: RegisteredView
-    },
-    {
-      path: '/selected',
-      name: 'selected',
-      component: SelectedAttendees
     }
   ]
 })

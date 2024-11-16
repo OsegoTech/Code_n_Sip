@@ -2,7 +2,7 @@
     <div class="bg-[#0b132b] min-h-screen text-white py-10">
       <!-- Header Section -->
       <div class="container mx-auto text-center mb-10">
-        <h1 class="text-4xl font-bold mb-4">🚀 UpSkill</h1>
+        <h1 class="text-4xl font-bold mb-4">🚀 NjiaDigital</h1>
         <p class="text-gray-300 text-lg">Your journey to learn and explore new skills</p>
       </div>
   
